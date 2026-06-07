@@ -1007,32 +1007,6 @@ ul.timeline>li>.timeline-panel:after {
     }
 }
 
-/* Smooth transitions for responsive layout */
-.isi {
-    transition: all 0.3s ease;
-}
-
-/* Fix for mobile touch scrolling */
-@media (max-width: 991px) {
-    .isi {
-        -webkit-overflow-scrolling: touch;
-    }
-}
-
-/* Ensure content is readable on background */
-.text-dark, 
-.card, 
-.timeline-body {
-    background-color: rgba(255,255,255,0.95) !important;
-}
-
-/* Desktop hover effects */
-@media (min-width: 992px) {
-    .isi:hover {
-        box-shadow: -5px 0 40px rgba(0,0,0,0.3);
-    }
-}
-
 /* ===== LIGHTBOX / POPUP STYLES ===== */
 .lightbox-overlay {
     position: fixed;
@@ -1236,7 +1210,7 @@ ul.timeline>li>.timeline-panel:after {
         background-position: center;
         background-attachment: fixed;
         z-index: 1;
-        opacity: 0.85;
+        opacity: 0.5;
     }
 }
 
