@@ -621,6 +621,92 @@ ul.timeline>li>.timeline-panel:after {
     }
 }
 
+/* ===== DESKTOP ADAPTIVE FIXES ===== */
+@media (min-width: 992px) {
+    body {
+        display: flex;
+        justify-content: center;
+        background-attachment: fixed;
+    }
+    
+    .isi {
+        width: 500px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        background-color: #fff !important;
+        box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+    
+    /* Fix map container */
+    #map, #map2 {
+        width: 100% !important;
+        height: 400px !important;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .leaflet-container {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    .leaflet-tile-container {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* Fix map tiles */
+    .leaflet-tile {
+        width: auto !important;
+        height: auto !important;
+        max-width: none !important;
+    }
+    
+    .ratio {
+        --bs-aspect-ratio: 50% !important;
+    }
+    
+    /* Fix gallery images */
+    .row .col-6 img {
+        height: 200px;
+        object-fit: cover;
+    }
+}
+
+/* ===== MOBILE MAP FIXES ===== */
+@media (max-width: 991px) {
+    #map, #map2 {
+        width: 100% !important;
+        height: 300px !important;
+    }
+    
+    .leaflet-container {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    .ratio {
+        --bs-aspect-ratio: 75% !important;
+    }
+}
+
+
+/* Additional map fixes */
+.leaflet-popup-content {
+    min-width: 120px !important;
+}
+
+.leaflet-control-attribution {
+    font-size: 8px !important;
+}
+
+/* Fix map tile loading */
+.leaflet-tile-pane {
+    transform: translateZ(0);
+}
+
+
 .divider-text:before {
     content: "";
     height: 2px;
@@ -918,5 +1004,291 @@ ul.timeline>li>.timeline-panel:after {
     100% {
         transform: scale(1.0);
         opacity: 1.0
+    }
+}
+
+/* Smooth transitions for responsive layout */
+.isi {
+    transition: all 0.3s ease;
+}
+
+/* Fix for mobile touch scrolling */
+@media (max-width: 991px) {
+    .isi {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Ensure content is readable on background */
+.text-dark, 
+.card, 
+.timeline-body {
+    background-color: rgba(255,255,255,0.95) !important;
+}
+
+/* Desktop hover effects */
+@media (min-width: 992px) {
+    .isi:hover {
+        box-shadow: -5px 0 40px rgba(0,0,0,0.3);
+    }
+}
+
+/* ===== LIGHTBOX / POPUP STYLES ===== */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.1);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255,255,255,0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 14px;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.gallery-image {
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .lightbox-prev,
+    .lightbox-next {
+        width: 35px;
+        height: 35px;
+        font-size: 25px;
+    }
+    
+    .lightbox-close {
+        top: -35px;
+        font-size: 25px;
+    }
+    
+    .lightbox-counter {
+        font-size: 12px;
+    }
+}
+
+
+
+/* ===== BACKGROUND PHOTO WITH SIDE SCROLL ===== */
+/* Desktop layout with background photo */
+@media (min-width: 992px) {
+    body {
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                    url('./assets/hqdefault.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        justify-content: flex-start;
+    }
+    
+    /* Main content - positioned on the left side */
+    .isi {
+        width: 500px;
+        margin: 0;
+        margin-left: 30px;
+        background-color: rgba(255, 255, 255, 0.96);
+        border-radius: 0;
+        box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+        overflow-y: auto;
+        max-height: 100vh;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Custom scrollbar */
+    .isi::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .isi::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    .isi::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+    }
+    
+    /* Background photo on the right side */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 530px;
+        background: url('./assets/hqdefault.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        z-index: 1;
+        opacity: 0.85;
+    }
+}
+
+/* Large desktop screens */
+@media (min-width: 1200px) {
+    .isi {
+        width: 550px;
+        margin-left: 50px;
+    }
+    
+    body::after {
+        left: 600px;
+    }
+}
+
+/* Mobile layout - blurred background */
+@media (max-width: 991px) {
+    body {
+        background: url('./assets/hqdefault.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+    
+    /* Blur overlay for mobile */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        filter: blur(8px);
+        z-index: 0;
+    }
+    
+    .isi {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.94);
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+/* Medium screens (tablet) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .isi {
+        width: 90%;
+        margin: 20px auto;
+        border-radius: 20px;
     }
 }
